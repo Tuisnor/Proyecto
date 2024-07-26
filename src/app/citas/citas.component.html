@@ -1,0 +1,47 @@
+<!-- citas.component.html -->
+<div class="form-container">
+  <form [formGroup]="citaForm" (ngSubmit)="scheduleCita()">
+    <h2>Programar Cita</h2>
+
+    <div>
+      <label for="id_especialidad">Especialidad</label>
+      <select id="id_especialidad" formControlName="id_especialidad" (change)="onEspecialidadChange()">
+        <option value="">Seleccione una especialidad</option>
+        <option *ngFor="let especialidad of especialidades" [value]="especialidad.id_especialidad">
+          {{ especialidad.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="medicos.length">
+      <label for="id_medico">Médico</label>
+      <select id="id_medico" formControlName="id_medico" (change)="onMedicoChange()">
+        <option value="">Seleccione un médico</option>
+        <option *ngFor="let medico of medicos" [value]="medico.id_medico">
+          {{ medico.nombre_medico }} {{ medico.apellido_medico }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label for="fecha">Fecha</label>
+      <input id="fecha" formControlName="fecha" type="date" />
+    </div>
+
+    <div>
+      <label for="hora">Hora</label>
+      <input id="hora" formControlName="hora" type="time" />
+    </div>
+
+    <button type="submit">Programar Cita</button>
+  </form>
+
+  <!-- Mensajes de éxito o error -->
+  <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>
+

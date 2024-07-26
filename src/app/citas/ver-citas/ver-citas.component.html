@@ -1,0 +1,35 @@
+<div class="citas-container">
+    <h2 class="titulo-citas">Mis Citas</h2>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  
+    <div *ngIf="!errorMessage && citas.length === 0">
+      <p>No tienes citas registradas.</p>
+    </div>
+  
+    <div *ngIf="citas.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre del Médico</th>
+            <th>Especialidad</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td>{{ cita.cita_medico.usuario.nombre }} {{ cita.cita_medico.usuario.apellido }}</td>
+            <td>{{ cita.cita_medico.especialidades[0]?.nombre }}</td>
+            <td>{{ cita.fecha | date }}</td>
+            <td>{{ cita.hora }}</td>
+            <td>{{ cita.estado }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
